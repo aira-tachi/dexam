@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>タイトル</title>
+<title></title>
 <script>
 //ログインページにリダイレクト
 location.href="/exam/scoremanager/Login.action";
