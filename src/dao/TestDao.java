@@ -182,12 +182,24 @@ public class TestDao extends Dao {
 				list = postFilter(rs, school);
 			}
 
-		} catch (Exception e) {
-			throw e;
+		}  finally {
+			// プリペアードステートメントを閉じる
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+					}
+			// コネクションを閉じる
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
 		}
-
-		st.close();
-		con.close();
 
 		return list;
 

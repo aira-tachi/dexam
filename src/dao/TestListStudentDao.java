@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.Student;
-import bean.Test;
 import bean.TestListStudent;
 
 public class TestListStudentDao extends Dao {
@@ -17,8 +16,6 @@ public class TestListStudentDao extends Dao {
 	 *
 	 * @param resultSet:ResultSet
 	 *            実行結果
-	 * @param school:School
-	 *            所属学校
  	 * @return
 	 * @throws Exception
 	 */
@@ -29,9 +26,8 @@ public class TestListStudentDao extends Dao {
 		// 実行結果を1件ずつ処理
 		while (rSet.next()){
 			// 学生別成績インスタンスを取得
-			Test test = new Test();
-
 			TestListStudent tls = new TestListStudent();
+
 			tls.setSubjectName(rSet.getString("subject_name"));
 			tls.setSubjectCd(rSet.getString("subject_cd"));
 			tls.setNum(rSet.getInt("no"));
