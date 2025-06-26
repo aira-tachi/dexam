@@ -27,7 +27,8 @@ ${param.scripts}
 		<div class="row justify-content-center">
 			<c:choose>
 				<%-- ログイン済みの場合 --%>
-				<c:when test="${user.isAuthenticated()}">
+				<%-- sessionScope.userによりセッションにログイン済みのユーザ情報を参照 --%>
+				<c:when test="${sessionScope.user.isAuthenticated()}">
 					<nav class="col-3" style="height:40rem;">
 						<c:import url="/common/navigation.jsp" />
 					</nav>
