@@ -93,7 +93,7 @@ public class ClassNumDao extends Dao {
 
 		try {
 			// プリペアードステートメントにSQL文をセット
-			st = con.prepareStatement("SELECT * FROM clas_snum "
+			st = con.prepareStatement("SELECT * FROM class_num "
 					+ "WHERE school_cd = ?");
 
 			// プリペアードステートメントに学
