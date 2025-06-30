@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Subject extends User implements Serializable {
 
 	/**
-	 * 学校コード:String
+	 * 科目コード:String
 	 */
 	private String cd;
 
