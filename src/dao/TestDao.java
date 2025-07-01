@@ -112,7 +112,8 @@ public class TestDao extends Dao {
 			// 学生情報の一部をテストインスタンスにセット
 			Student stu = new Student();
 			stu.setNo(rSet.getString("student_no"));
-			stu.setClassNum(rSet.getString("class_num"));
+			stu.setName(rSet.getString("student_name"));
+			stu.setEntYear(rSet.getInt("ent_year"));
 			stu.setSchool(school);
 			test.setStudent(stu);
 
@@ -127,6 +128,7 @@ public class TestDao extends Dao {
 			test.setSchool(school);
 			test.setNo(rSet.getInt("no"));
 			test.setPoint(rSet.getInt("point"));
+			test.setClassNum(rSet.getString("class_num"));
 
 			// テスト情報リストに追加
 			list.add(test);
