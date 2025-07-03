@@ -208,7 +208,7 @@ public class TestDao extends Dao {
 	}
 
 	/**
-	 * saveメソッド 複数のテスト情報の保存
+	 * saveメソッド① 複数のテスト情報の保存
 	 *
 	 * @param list:List<Test>
 	 *            テスト情報のリスト
