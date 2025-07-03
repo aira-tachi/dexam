@@ -48,7 +48,7 @@ public class TestRegistExecuteAction extends Action {
 		SubjectDao subjectDao = new SubjectDao();
 		Subject subject = subjectDao.get(f3, school);
 
-		// 成績情報の取得
+		// 成績情報の取得（空データも含む）
 		TestDao testDao = new TestDao();
 		List<Test> tests = testDao.filter(entYear, f2, subject, no, school);
 
@@ -60,6 +60,11 @@ public class TestRegistExecuteAction extends Action {
 		for (int i = 0; i < tests.size(); i++) {
 			pointError.add(""); // 初期化
 		}
+
+		// 登録・変更のあったテストインスタンスのみ保存するリスト
+		List<Test> saveTests = new ArrayList<>();
+
+		// エラーフラグ
 		boolean hasError = false;
 
 		// 各学生の点数をチェック
@@ -68,22 +73,34 @@ public class TestRegistExecuteAction extends Action {
 
 			// 空欄のチェック
 			if (pointStr == null || pointStr.isEmpty()) {
-				pointError.set(i, "0～100の範囲で入力してください");
-				hasError = true;
+				// 空欄はスキップし、エラーメッセージを表示させない
+				continue;
 			} else {
-			try {
-				// 点数のチェック
-				int point = Integer.parseInt(pointStr);
-				if (point < 0 || point > 100) {
+				try {
+					// 点数のチェック
+					int point = Integer.parseInt(pointStr);
+					if (point < 0 || point > 100) {
+						pointError.set(i, "0～100の範囲で入力してください");
+						hasError = true;
+					} else {
+						// 学校・クラス番号・科目・回数・点数を設定し、保存リストに追加
+						Test test = tests.get(i);
+						tests.get(i).setSchool(school);
+
+						if (test.getStudent().getClassNum() != null) {
+						    test.setClassNum(test.getStudent().getClassNum());
+						} else {
+						    test.setClassNum(f2);
+						}
+						tests.get(i).setSubject(subject);
+						tests.get(i).setNo(no);
+						tests.get(i).setPoint(point);
+
+						saveTests.add(test);
+						}
+				} catch (NumberFormatException e) {
 					pointError.set(i, "0～100の範囲で入力してください");
 					hasError = true;
-				} else {
-					// 点数を設定
-					tests.get(i).setPoint(point);
-				}
-			} catch (NumberFormatException e) {
-				pointError.set(i, "0～100の範囲で入力してください");
-				hasError = true;
 				}
 			}
 		}
@@ -106,7 +123,7 @@ public class TestRegistExecuteAction extends Action {
 			List<Subject> subjects = subjectDao.filter(school);
 			req.setAttribute("subjects", subjects);
 
-			//　studentテーブルから入学年度を取得
+			// studentテーブルから入学年度を取得
 			List<Integer> entYears = new ArrayList<>();
 			Dao dao = new Dao();
 			try (Connection con = dao.getConnection()) {
@@ -134,7 +151,7 @@ public class TestRegistExecuteAction extends Action {
 		}
 
 		// エラーがなければ、成績情報をデータベースに保存
-		boolean result = testDao.save(tests);
+		boolean result = testDao.save(saveTests);
 
 		// JSPへフォワード
 		req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);

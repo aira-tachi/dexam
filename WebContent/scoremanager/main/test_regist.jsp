@@ -114,7 +114,7 @@
 							<c:forEach var="test" items="${tests}" varStatus="status">
 								<tr>
 									<td>${test.student.entYear}</td>
-									<td>${test.classNum}</td>
+									<td>${test.student.classNum}</td>
 									<td>
 										${test.student.no}
 										<input type="hidden" name="studentNo" value="${test.student.no}">
