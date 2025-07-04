@@ -131,12 +131,12 @@
 								<td>${test1.student.name}</td>
 								<%-- 1回目 --%>
 								<td><c:choose>
-								  <c:when test="${not empty test1}">${test1.point}</c:when>
+								  <c:when test="${not empty test1 && not empty test1.point}">${test1.point}</c:when>
 								  <c:otherwise>-</c:otherwise>
 								</c:choose></td>
 								<%-- 2回目 --%>
 								<td><c:choose>
-								  <c:when test="${not empty test2}">${test2.point}</c:when>
+								  <c:when test="${not empty test2 && not empty test2.point}">${test2.point}</c:when>
 								  <c:otherwise>-</c:otherwise>
 								</c:choose></td>
 							</tr>
