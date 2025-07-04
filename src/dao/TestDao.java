@@ -150,7 +150,7 @@ public class TestDao extends Dao {
 	}
 
 	/**
-	 * filterメソッド① 入学年、クラス番号、科目、回数、所属学校で絞り込み
+	 * filterメソッド 入学年、クラス番号、科目、回数、所属学校で絞り込み
 	 *                未登録含め、学生のテスト情報を取得(studentとtestを結合)
 	 * @param entYear:int
 	 *            入学年(student)
