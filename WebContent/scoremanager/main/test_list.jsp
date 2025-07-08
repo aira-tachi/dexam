@@ -12,17 +12,22 @@
 
 	<c:param name="content">
 		<section class="me-4">
-		<c:choose>
-			<c:when test="${type =='subject'}">
-				<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績一覧（科目）</h2>
-			</c:when>
-			<c:when test="${type =='student'}">
-				<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績一覧（学生）</h2>
-			</c:when>
-			<c:otherwise>
-				<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
-			</c:otherwise>
-		</c:choose>
+		<%-- 画面状況によってタイトルが変化 --%>
+			<c:choose>
+				<%-- 科目情報で検索 --%>
+				<c:when test="${type =='subject'}">
+					<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績一覧（科目）</h2>
+				</c:when>
+				<%-- 学生情報で検索 --%>
+				<c:when test="${type =='student'}">
+					<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績一覧（学生）</h2>
+				</c:when>
+				<%-- 初回アクセス時 --%>
+				<c:otherwise>
+					<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
+				</c:otherwise>
+			</c:choose>
+
 			<div class="border p-3 mb-3 rounded">
 
 			<%-- 科目別検索フォーム --%>
