@@ -15,10 +15,10 @@
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
 			<div class="border p-3 mb-3 rounded">
 				<%-- 検索フォーム画面 --%>
-				<form action="TestRegist.action" method="post"class="d-flex align-items-center flex-wrap">
+				<form action="TestRegist.action" method="post"class="d-flex align-items-center gap-3">
 					<div class="d-flex flex-wrap gap-3 p-1">
 						<%-- 入学年度 --%>
-						<div class="d-flex flex-column" style="width: 140px;">
+						<div class="d-flex flex-column" style="width: 120px;">
 							<label class="form-label">入学年度</label>
 							<select name="f1" id="f1" class="form-select">
 								<%-- 初期値は"--------" --%>
@@ -30,7 +30,7 @@
 						</div>
 
 						<%-- クラス --%>
-						<div class="d-flex flex-column" style="width: 140px;">
+						<div class="d-flex flex-column" style="width: 120px;">
 							<label class="form-label">クラス</label>
 							<select name="f2" id="f2" class="form-select">
 								<option value="">--------</option>
@@ -41,7 +41,7 @@
 						</div>
 
 						<%-- 科目 --%>
-						<div class="d-flex flex-column" style="width: 280px;">
+						<div class="d-flex flex-column" style="width: 260px;">
 							<label class="form-label">科目</label>
 							<select name="f3" id="f3" class="form-select">
 								<option value="">--------</option>
@@ -52,7 +52,7 @@
 						</div>
 
 						<%-- 回数 --%>
-						<div class="d-flex flex-column" style="width: 140px;">
+						<div class="d-flex flex-column" style="width: 120px;">
 							<label class="form-label">回数</label>
 							<select name="f4" id="f4" class="form-select">
 								<option value="">--------</option>
@@ -63,7 +63,7 @@
 						</div>
 
 						<%-- 検索ボタン --%>
-						<div class="d-flex align-items-center ms-5">
+						<div class="d-flex align-items-center ms-3">
 							<button type="submit" class="btn btn-secondary">検索</button>
 						</div>
 					</div>
