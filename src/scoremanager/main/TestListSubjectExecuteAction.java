@@ -114,11 +114,11 @@ public class TestListSubjectExecuteAction extends Action {
 		req.setAttribute("testsList", testsList);
 
 		// リクエストにセット
+		req.setAttribute("type", "subject");                 // 検索タイプ
 		req.setAttribute("subjectName", subject.getName());  // 科目名
-		req.setAttribute("type", "subject");  // 検索タイプ
-		req.setAttribute("f1", f1);  // 入学年度
-		req.setAttribute("f2", f2);  // クラス
-		req.setAttribute("f3", f3);  // 科目コード
+		req.setAttribute("f1", f1);                          // 入学年度
+		req.setAttribute("f2", f2);                          // クラス
+		req.setAttribute("f3", f3);                          // 科目コード
 
 		// JSPへフォワード
 		req.getRequestDispatcher("test_list.jsp").forward(req, res);
