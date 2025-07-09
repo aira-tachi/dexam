@@ -38,7 +38,6 @@ public class SubjectListAction extends Action {
 	        subject = new java.util.ArrayList<>();
 	    }
 
-
 		//ビジネスロジック 4
 		//なし
 

@@ -46,6 +46,7 @@ List<Subject> list=(List<Subject>)request.getAttribute("subject_list");
 	         } %>
 	      <%-- ここまで空チェック --%>
 
+
 	    </table>
 	  </section>
 	</c:param>
