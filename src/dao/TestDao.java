@@ -112,7 +112,9 @@ public class TestDao extends Dao {
 			// 学生情報の一部をテストインスタンスにセット
 			Student stu = new Student();
 			stu.setNo(rSet.getString("student_no"));
-			stu.setClassNum(rSet.getString("class_num"));
+			stu.setClassNum(rSet.getString("student_class_num"));
+			stu.setName(rSet.getString("name"));
+			stu.setEntYear(rSet.getInt("ent_year"));
 			stu.setSchool(school);
 			test.setStudent(stu);
 
@@ -123,10 +125,22 @@ public class TestDao extends Dao {
 			subject.setSchool(school);
 			test.setSubject(subject);
 
-			// その他の情報をテストインスタンスにセット
+			// 所属学校をテストインスタンスにセット
 			test.setSchool(school);
+
+			// クラス番号をセット
+			test.setClassNum(rSet.getString("test_class_num"));
+
+			// 回数をテストインスタンスにセット
 			test.setNo(rSet.getInt("no"));
-			test.setPoint(rSet.getInt("point"));
+
+			// 得点がnullでも対応
+			int point = rSet.getInt("point");
+			if (rSet.wasNull()) {
+				test.setPoint(null);
+			} else {
+				test.setPoint(point);
+			}
 
 			// テスト情報リストに追加
 			list.add(test);
@@ -136,8 +150,8 @@ public class TestDao extends Dao {
 	}
 
 	/**
-	 * filterメソッド① 入学年、クラス番号、科目、回数、所属学校で絞り込み
-	 *                学生のテスト情報を取得(studentとtestを結合)
+	 * filterメソッド 入学年、クラス番号、科目、回数、所属学校で絞り込み
+	 *                未登録含め、学生のテスト情報を取得(studentとtestを結合)
 	 * @param entYear:int
 	 *            入学年(student)
 	 * @param classNum:String
@@ -161,20 +175,23 @@ public class TestDao extends Dao {
 
 		try {
 			// プリペアードステートメントにSQL文をセット
-			st = con.prepareStatement("SELECT * FROM test t "
-					+ "INNER JOIN student s ON t.student_no = s.no "
-					+ "WHERE s.ent_year = ? "
-					+ "AND t.class_num = ? "
-					+ "AND t.subject_cd = ? "
-					+ "AND t.no = ? "
-					+ "AND t.school_cd = ?");
+			st = con.prepareStatement(
+				    "SELECT s.no AS student_no, s.name, s.ent_year, s.class_num AS student_class_num, " +
+				    "t.subject_cd, t.no, t.point, t.class_num AS test_class_num " +
+				    "FROM student s " +
+				    "LEFT JOIN test t ON s.no = t.student_no AND t.subject_cd = ? AND t.no = ? AND t.school_cd = ? " +
+				    "WHERE s.ent_year = ? " +
+				    "AND s.class_num = ? " +
+				    "AND s.school_cd = ?"
+				);
 
 			// プリペアードステートメントに各条件をバインド
-			st.setInt(1, entYear);
-			st.setString(2, classNum);
-			st.setString(3, subject.getCd());
-			st.setInt(4,no) ;
-			st.setString(5, school.getCd());
+			st.setString(1, subject.getCd());
+			st.setInt(2, no);
+			st.setString(3, school.getCd());
+			st.setInt(4, entYear);
+			st.setString(5, classNum);
+			st.setString(6, school.getCd());
 
 			// プリペアードステートメントを実行し、結果をセット
 			try(ResultSet rs = st.executeQuery()) {;
@@ -206,7 +223,7 @@ public class TestDao extends Dao {
 	}
 
 	/**
-	 * saveメソッド 複数のテスト情報の保存
+	 * saveメソッド① 複数のテスト情報の保存
 	 *
 	 * @param list:List<Test>
 	 *            テスト情報のリスト
@@ -272,6 +289,8 @@ public class TestDao extends Dao {
 						+ "AND school_cd = ? "
 						+ "AND no = ?");
 
+				// プリペアードステートメントに各条件をバインド
+
 				// 得点がnullならserNullでバインド
 				if (test.getPoint() == null) {
 					st.setNull(1, java.sql.Types.INTEGER);
@@ -279,11 +298,30 @@ public class TestDao extends Dao {
 					st.setInt(1, test.getPoint());
 				}
 
-				// プリペアードステートメントに各条件をバインド
 				st.setString(2, test.getStudent().getNo());
 				st.setString(3, test.getSubject().getCd());
 				st.setString(4, test.getSchool().getCd());
 				st.setInt(5, test.getNo());
+
+			} else {
+			    	// 存在しない場合：登録(INSERT)
+					st = con.prepareStatement(
+					        "INSERT INTO test (student_no, subject_cd, school_cd, no, class_num, point) "
+					        + "VALUES (?, ?, ?, ?, ?, ?)");
+
+					// プリペアードステートメントに各条件をバインド
+				    st.setString(1, test.getStudent().getNo());
+				    st.setString(2, test.getSubject().getCd());
+				    st.setString(3, test.getSchool().getCd());
+				    st.setInt(4, test.getNo());
+				    st.setString(5, test.getClassNum());
+
+					// 得点がnullならserNullでバインド
+					if (test.getPoint() == null) {
+						st.setNull(6, java.sql.Types.INTEGER);
+					} else {
+						st.setInt(6, test.getPoint());
+					}
 			}
 
 			// SQL文実行後、更新行数が1以上なら成功
