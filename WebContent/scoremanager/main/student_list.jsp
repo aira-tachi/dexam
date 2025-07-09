@@ -64,15 +64,15 @@
 
 <c:if test="${not empty students}">
 <div class="px-4">
-<table class="table table-bordered">
-<thead class="table-light">
+<table class="table">
+<thead>
 <tr>
 <th>入学年度</th>
 <th>学生番号</th>
 <th>氏名</th>
 <th>クラス</th>
 <th>在学中</th>
-<th>操作</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
@@ -89,7 +89,7 @@
 </c:choose>
 </td>
 <td>
-<a href="StudentUpdate.action?studentNo=${student.no}" class="btn btn-sm btn-outline-secondary">変更</a>
+<a href="StudentUpdate.action?studentNo=${student.no}">変更</a>
 </td>
 </tr>
 </c:forEach>
@@ -100,10 +100,3 @@
 </section>
 </c:param>
 </c:import>
-
-Oracle Java Technologies | Oracle
-
-Java can help reduce costs, drive innovation, & improve application services; the #1 programming language for IoT, enterprise architecture, and cloud computing.
-
-Oracle Java Technologies | Oracle
-Java can help reduce costs, drive innovation, & improve application services; the #1 programming language for IoT, enterprise architecture, and cloud computing.
