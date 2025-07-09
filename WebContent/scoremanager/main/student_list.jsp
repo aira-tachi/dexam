@@ -59,7 +59,7 @@
 </div>
 
 <c:if test="${empty students}">
-<div class="px-4">学生情報が存在しません</div>
+<div class="px-4">学生情報が存在しませんでした</div>
 </c:if>
 
 <c:if test="${not empty students}">
