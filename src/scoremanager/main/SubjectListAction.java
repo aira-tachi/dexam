@@ -33,6 +33,11 @@ public class SubjectListAction extends Action {
 		SubjectDao subDao = new SubjectDao();
 		List<Subject> subject = subDao.filter(school);
 
+		 // --- 追加: DAO が null を返した場合の防御的コーディング ---
+	    if (subject == null) {
+	        subject = new java.util.ArrayList<>();
+	    }
+
 
 		//ビジネスロジック 4
 		//なし
