@@ -44,7 +44,7 @@ public class SubjectDao extends Dao {
                 // カラム値を Subject オブジェクトにマッピング
                 subject.setCd(rs.getString("cd"));       // 科目コード
                 subject.setName(rs.getString("name"));   // 科目名
-                subject.setSchool(school);                 // 関連する School インスタンス
+                subject.setSchool(school);               // 関連する School インスタンス
             }
         } catch (Exception e) {
             // 例外は呼び出し元に伝搬
@@ -193,4 +193,32 @@ public class SubjectDao extends Dao {
             }
         }
     }
+
+    // ←— ここから追加 ——————————————————————————————————
+
+    /**
+     * updateメソッド: 科目データを更新する
+     *
+     * @param subject 更新対象の Subject（cd, name, school がセット済み）
+     * @param school  ログイン中ユーザーの所属 School
+     * @return 更新件数
+     * @throws Exception DB接続やクエリ実行時の例外
+     */
+    public int update(Subject subject, School school) throws Exception {
+        String sql =
+            "UPDATE subject "
+          + "SET name = ? "
+          + "WHERE cd = ? AND school_cd = ?";
+        try (
+            Connection con = super.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+        ) {
+            ps.setString(1, subject.getName());
+            ps.setString(2, subject.getCd());
+            ps.setString(3, school.getCd());
+            return ps.executeUpdate();
+        }
+    }
+
+    // ←— ここまで追加 ——————————————————————————————————
 }
