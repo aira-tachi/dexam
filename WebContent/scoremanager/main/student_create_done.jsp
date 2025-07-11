@@ -12,7 +12,7 @@
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2">学生情報登録</h2>
 			<div id="wrap_box">
 				<p class="text-center" style="background-color:#66CC99; margin-bottom: 120px;">登録が完了しました</p>
-				<a href="TestRegist.action" class="me-5">戻る</a>
+				<a href="StudentCreate.action" class="me-5">戻る</a>
 				<a href="StudentList.action">学生一覧</a>
 			</div>
 		</div>
