@@ -1,9 +1,5 @@
 package scoremanager.main;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -16,8 +12,6 @@ import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import bean.Test;
-import dao.ClassNumDao;
-import dao.Dao;
 import dao.SubjectDao;
 import dao.TestDao;
 import tool.Action;
@@ -36,34 +30,8 @@ public class TestListSubjectExecuteAction extends Action {
 		}
 		School school = teacher.getSchool();
 
-		// 検索結果画面で表示されるための処理
-		// クラス一覧を取得
-		ClassNumDao classNumDao = new ClassNumDao();
-		List<String> classNums = classNumDao.filter(school);
-		req.setAttribute("classNums", classNums);
-
-		// 科目一覧を取得
-		SubjectDao subjectDao = new SubjectDao();
-		List<Subject> subjects = subjectDao.filter(school);
-		req.setAttribute("subjects", subjects);
-
-		// studentテーブルから入学年度を取得
-		List<Integer> entYears = new ArrayList<>();
-		Dao dao = new Dao();
-		try (Connection con = dao.getConnection()) {
-			PreparedStatement st = con.prepareStatement(
-				"SELECT DISTINCT ent_year FROM student "
-				+ "WHERE school_cd = ?");
-			st.setString(1, school.getCd());
-			ResultSet rs = st.executeQuery();
-			while (rs.next()) {
-				entYears.add(rs.getInt("ent_year"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		req.setAttribute("entYears", entYears);
-
+		// プルダウンに選択肢を表示するためにloadDropdownOptionsを呼び出す
+		loadDropdownOptions(req, teacher.getSchool());
 
 		// 検索条件(入学年度、クラス、科目、回数)を取得
 		String f1 = req.getParameter("f1");  // 入学年度
@@ -82,6 +50,7 @@ public class TestListSubjectExecuteAction extends Action {
 		int entYear = Integer.parseInt(f1);
 
 		// 科目情報の取得
+		SubjectDao subjectDao = new SubjectDao();
 		Subject subject = subjectDao.get(f3, school);
 
 		// 成績情報の取得（空データも含む）

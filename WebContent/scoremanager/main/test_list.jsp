@@ -28,15 +28,15 @@
 				</c:otherwise>
 			</c:choose>
 
-			<div class="border p-3 mb-3 rounded">
+			<div class="border p-3 mb-3 rounded mx-auto" style="max-width: 780px;">
 
 			<%-- 科目別検索フォーム --%>
 				<form action="TestListSubjectExecute.action" method="post" class="d-flex align-items-center flex-wrap">
 				 	<input type="hidden" name="type" value="subject">
 					<div class="d-flex flex-wrap gap-3 p-1">
-						<p class="mb-0 me-5 align-self-center">科目情報</p>
+						<p class="mb-0 me-4 align-self-center">科目情報</p>
 						<%-- 入学年度 --%>
-						<div class="d-flex flex-column me-2" style="width: 140px;">
+						<div class="d-flex flex-column me-2" style="width: 110px;">
 							<label class="form-label">入学年度</label>
 							<select name="f1" id="f1" class="form-select">
 								<%-- 初期値は"--------" --%>
@@ -48,7 +48,7 @@
 						</div>
 
 						<%-- クラス --%>
-						<div class="d-flex flex-column me-2" style="width: 140px;">
+						<div class="d-flex flex-column me-2" style="width: 110px;">
 							<label class="form-label">クラス</label>
 							<select name="f2" id="f2" class="form-select">
 								<option value="">--------</option>
@@ -59,7 +59,7 @@
 						</div>
 
 						<%-- 科目 --%>
-						<div class="d-flex flex-column me-2" style="width: 280px;">
+						<div class="d-flex flex-column me-2" style="width: 220px; ">
 							<label class="form-label">科目</label>
 							<select name="f3" id="f3" class="form-select">
 								<option value="">--------</option>
@@ -89,7 +89,7 @@
 				<form action="TestListStudentExecute.action" method="post" class="d-flex align-items-center flex-wrap">
 				<input type="hidden" name="type" value="student">
 					<div class="d-flex flex-wrap gap-3 p-1">
-						<p class="mb-0 me-5 align-self-center">学生情報</p>
+						<p class="mb-0 me-4 align-self-center">学生情報</p>
 						<%-- 学生番号 --%>
 						<div class="d-flex flex-column" style="width: 260px;">
 							<label class="form-label">学生番号</label>
@@ -113,7 +113,7 @@
 
 		<%-- 科目別成績の検索結果画面 --%>
 			<%-- subjectNameのチェック --%>
-			<c:if test="${not empty testList && not empty subjectName && type =='subject'}">
+			<c:if test="${not empty testsList && not empty subjectName && type =='subject'}">
 				<div class="mb-3">
 					<label class="form-label">科目：${subjectName}</label>
 				</div>

@@ -72,12 +72,6 @@ public class TestListSubjectDao extends Dao {
 		// Mapの値をlistにして変換して渡す
 		return new ArrayList<>(map.values());
 	}
-
-	private void put(int no, Object object) {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
-
 	/**
 	 * filterメソッド 学生に紐づいたテスト情報を絞り込む
 	 *
