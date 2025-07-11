@@ -22,6 +22,7 @@ public class TestListStudentExecuteAction extends Action {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		System.out.println("start TestListStudentExecuteAction");
 
 		// セッションデータからログイン中のユーザーデータを取得
 		Teacher teacher = (Teacher) req.getSession().getAttribute("user");
@@ -31,6 +32,9 @@ public class TestListStudentExecuteAction extends Action {
 			return;
 		}
 		School school = teacher.getSchool();
+
+		// プルダウンに選択肢を表示するためにloadDropdownOptionsを呼び出す
+		loadDropdownOptions(req, teacher.getSchool());
 
 		// 検索条件(学生番号)を取得
 		String f4 = req.getParameter("f4");
@@ -58,7 +62,7 @@ public class TestListStudentExecuteAction extends Action {
 				Test tests2 = testDao.get(student, subject, school, 2);
 
 				// 成績が登録されている場合はテストデータをマージ
-				if (tests1 != null && tests2 != null) {
+				if (tests1 != null || tests2 != null) {
 					merged.put(subject.getCd(), new Test[] { tests1, tests2 });
 				}
 			}
@@ -66,6 +70,8 @@ public class TestListStudentExecuteAction extends Action {
 
 		// マージされたテストデータをリストに変換
 		List<Test[]> testsList = new ArrayList<>(merged.values());
+
+		req.setAttribute("subjects", subjects);  // 科目一覧
 
 		// リクエストにセット
 		req.setAttribute("type", "student");       // 検索タイプ

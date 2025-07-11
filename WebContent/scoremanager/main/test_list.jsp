@@ -113,7 +113,7 @@
 
 		<%-- 科目別成績の検索結果画面 --%>
 			<%-- subjectNameのチェック --%>
-			<c:if test="${not empty testList && not empty subjectName && type =='subject'}">
+			<c:if test="${not empty testsList && not empty subjectName && type =='subject'}">
 				<div class="mb-3">
 					<label class="form-label">科目：${subjectName}</label>
 				</div>
