@@ -9,10 +9,26 @@
             <form action="StudentCreateExecute.action" method="post" class="mx-auto" style="max-width: 600px;">
 
                 <div class="mb-3">
+                    <label for="entYear" class="form-label">入学年度</label>
+                    <select name="ent_year" id="ent_year" class="form-select">
+                    	<option value="">--------</option>
+                        <c:forEach var="year" items="${entYearList}">
+                            <option value="${year}" <c:if test="${year eq ent_year}">selected</c:if>>${year}</option>
+                        </c:forEach>
+                    </select>
+                    <c:if test="${not empty error_entYear}">
+    					<div class="text-warning">${error_entYear}</div>
+					</c:if>
+                </div>
+
+                <div class="mb-3">
                     <label for="no" class="form-label">学生番号</label>
                     <input type="text" name="no" id="no" class="form-control"
                            value="${no}" maxlength="10" required
                            placeholder="学生番号を入力してください">
+                    <c:if test="${not empty error_no}">
+    					<div class="text-warning">${error_no}</div>
+					</c:if>
                 </div>
 
                 <div class="mb-3">
@@ -22,22 +38,18 @@
                            placeholder="氏名を入力してください">
                 </div>
 
-                <div class="mb-3">
-                    <label for="entYear" class="form-label">入学年度</label>
-                    <select name="entYearList" id="entYearList" class="form-select" required>
-                        <c:forEach var="year" items="${entYearList}">
-                            <option value="${year}">${year}</option>
-                        </c:forEach>
-                    </select>
-                </div>
 
                 <div class="mb-3">
                     <label for="classNum" class="form-label">クラス</label>
-                    <select name="classNumList" id="classNumList" class="form-select" required>
+                    <select name="class_num" id="class_num" class="form-select">
+                    	<option value="">--------</option>
                         <c:forEach var="classNum" items="${classNumList}">
-                            <option value="${classNum}">${classNum}</option>
+                            <option value="${classNum}" <c:if test="${classNum eq class_num}">selected</c:if>>${classNum}</option>
                         </c:forEach>
                     </select>
+                    <c:if test="${not empty error_classNum}">
+    					<div class="text-warning">${error_classNum}</div>
+					</c:if>
                 </div>
 
                 <div class="text-center mt-4">

@@ -50,7 +50,7 @@
 </form>
 
 <div class="px-4 mb-3">
-<a href="StudentEntry.action">新規登録</a>
+<a href="StudentCreate.action">新規登録</a>
 </div>
 
       <div class="px-4 mb-3">
