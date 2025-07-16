@@ -15,10 +15,10 @@
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
 			<div class="border p-3 mb-3 rounded">
 				<%-- 検索フォーム画面 --%>
-				<form action="TestRegist.action" method="post"class="d-flex align-items-center gap-3">
-					<div class="d-flex flex-wrap gap-3 p-1">
+				<form action="TestRegist.action" method="post"class="row g-3 align-items-end">
+					<div class="d-flex flex-wrap gap-3">
 						<%-- 入学年度 --%>
-						<div class="d-flex flex-column" style="width: 120px;">
+						<div class="col-12 col-md-2">
 							<label class="form-label">入学年度</label>
 							<select name="f1" id="f1" class="form-select">
 								<%-- 初期値は"--------" --%>
@@ -30,7 +30,7 @@
 						</div>
 
 						<%-- クラス --%>
-						<div class="d-flex flex-column" style="width: 120px;">
+						<div class="col-12 col-md-2">
 							<label class="form-label">クラス</label>
 							<select name="f2" id="f2" class="form-select">
 								<option value="">--------</option>
@@ -41,7 +41,7 @@
 						</div>
 
 						<%-- 科目 --%>
-						<div class="d-flex flex-column" style="width: 260px;">
+						<div class="col-12 col-md-4">
 							<label class="form-label">科目</label>
 							<select name="f3" id="f3" class="form-select">
 								<option value="">--------</option>
@@ -52,7 +52,7 @@
 						</div>
 
 						<%-- 回数 --%>
-						<div class="d-flex flex-column" style="width: 120px;">
+						<div class="col-12 col-md-2">
 							<label class="form-label">回数</label>
 							<select name="f4" id="f4" class="form-select">
 								<option value="">--------</option>
@@ -63,7 +63,7 @@
 						</div>
 
 						<%-- 検索ボタン --%>
-						<div class="d-flex align-items-center ms-3">
+						<div class="d-flex align-items-center ms-auto me-auto">
 							<button type="submit" class="btn btn-secondary">検索</button>
 						</div>
 					</div>
@@ -113,14 +113,14 @@
 						<tbody>
 							<c:forEach var="test" items="${tests}" varStatus="status">
 								<tr>
-									<td>${test.student.entYear}</td>
-									<td>${test.student.classNum}</td>
-									<td>
+									<td class="align-middle">${test.student.entYear}</td>
+									<td class="align-middle">${test.student.classNum}</td>
+									<td class="align-middle">
 										${test.student.no}
 										<input type="hidden" name="studentNo" value="${test.student.no}">
 									</td>
-									<td>${test.student.name}</td>
-									<td>
+									<td class="align-middle">${test.student.name}</td>
+									<td class="align-middle">
 										<input type="text" name="point" class="form-control" value="${test.point}" min="0" max="100" style="width: 200px;">
 										<%-- エラー表示 --%>
 										<c:if test="${not empty pointError[status.index]}">
