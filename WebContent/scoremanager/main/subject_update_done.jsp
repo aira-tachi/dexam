@@ -10,9 +10,9 @@
 
 	<c:param name="content">
 		<div id="wrap_box">
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2">科目情報削除</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2">科目情報変更</h2>
 			<div id="wrap_box">
-				<p class="text-center" style="background-color:#66CC99; margin-bottom: 120px;">削除が完了しました</p>
+				<p class="text-center" style="background-color:#66CC99; margin-bottom: 120px;">変更が完了しました</p>
 				<a href="SubjectList.action" class="me-5">科目一覧</a>
 			</div>
 		</div>
