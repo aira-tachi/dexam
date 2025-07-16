@@ -24,7 +24,7 @@
 				</c:when>
 				<%-- 初回アクセス時 --%>
 				<c:otherwise>
-					<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
+					<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績参照</h2>
 				</c:otherwise>
 			</c:choose>
 
