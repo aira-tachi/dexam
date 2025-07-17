@@ -34,7 +34,7 @@
 				<form action="TestListSubjectExecute.action" method="post" class="row align-items-center g-3">
 				 	<input type="hidden" name="type" value="subject">
 					<div class="d-flex flex-wrap gap-3">
-						<p class="mb-0 me-4 align-self-center">科目情報</p>
+						<p class="mb-0 ms-3 me-4 align-self-center">科目情報</p>
 						<%-- 入学年度 --%>
 						<div class="col-12 col-md-2">
 							<label class="form-label">入学年度</label>
@@ -89,7 +89,7 @@
 				<form action="TestListStudentExecute.action" method="post" class="row g-3 align-items-center">
 				<input type="hidden" name="type" value="student">
 					<div class="d-flex flex-wrap gap-3">
-						<p class="mb-0 me-4 align-self-center">学生情報</p>
+						<p class="mb-0 ms-3 me-4 align-self-center">学生情報</p>
 						<%-- 学生番号 --%>
 						<div class="col-12 col-md-4">
 							<label class="form-label">学生番号</label>
