@@ -214,10 +214,11 @@
 							<c:forEach var="pair" items="${testsList}">
 							  <c:set var="test1" value="${pair[0]}" />
 							  <c:set var="test2" value="${pair[1]}" />
+							  <c:set var="subject" value="${not empty test1 ? test1.subject : (not empty test2 ? test2.subject : null)}" />
 
 							  <tr>
-							    <td>${test1.subject.name}</td>
-							    <td>${test1.subject.cd}</td>
+							    <td>${subject.name}</td>
+							    <td>${subject.cd}</td>
 							    <td>1</td>
 							    <td>
 							      <c:choose>
@@ -230,8 +231,8 @@
 							  </tr>
 
 							  <tr>
-							    <td>${test2.subject.name}</td>
-							    <td>${test2.subject.cd}</td>
+							    <td>${subject.name}</td>
+							    <td>${subject.cd}</td>
 							    <td>2</td>
 							    <td>
 							      <c:choose>
