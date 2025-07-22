@@ -1,9 +1,13 @@
 package scoremanager.main;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.School;
 import bean.Teacher;
+import dao.ClassNumDao;
 import tool.Action;
 
 public class TestListAction extends Action {
@@ -20,10 +24,17 @@ public class TestListAction extends Action {
 			return;
 		}
 
-		// プルダウンに選択肢を表示するためにloadDropdownOptionsを呼び出す
-		loadDropdownOptions(req, teacher.getSchool());
+		// ログインユーザーの所属学校を取得
+		School school = teacher.getSchool();
 
-		//JSPへフォワード 7
-		req.getRequestDispatcher("test_list.jsp").forward(req, res);
+		// プルダウンに選択肢を表示するためにクラス一覧を取得
+		ClassNumDao classNumDao = new ClassNumDao();
+		List<String> classNumList = classNumDao.filter(school);
+
+		// JSPにデータをセット
+		req.setAttribute("classNumList", classNumList);
+
+		//JSPへフォワード
+		req.getRequestDispatcher("class_list.jsp").forward(req, res);
 	}
 }
