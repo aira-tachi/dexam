@@ -120,7 +120,7 @@
 			</c:if>
 
 			<%-- 学生情報の有無をチェック --%>
-			<c:if test="${empty testsList && type == 'subject'}">
+			<c:if test="${empty testsList && type == 'subject'&& (not empty f1 or not empty f2 or not empty f3)}">
 				<p class="text-body">学生情報が存在しませんでした。</p>
 			</c:if>
 
