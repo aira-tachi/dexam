@@ -4,9 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:import url="/common/base.jsp">
-	<c:param name="title">
-		成績参照
-	</c:param>
+	<c:param name="title">成績参照</c:param>
 
 	<c:param name="scripts"></c:param>
 
